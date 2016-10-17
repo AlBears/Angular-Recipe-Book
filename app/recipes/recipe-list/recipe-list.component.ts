@@ -1,11 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { Recipe } from '../recipe';
 @Component({
   moduleId: module.id,
   selector: 'rb-recipe-list',
   templateUrl: 'recipe-list.component.html'
 })
-export class RecipeListComponent {
+export class RecipeListComponent implements OnInit {
   recipes: Recipe[] = [];
-  recipe = new Recipe('Dummy', 'Dummy', 'https://images-na.ssl-images-amazon.com/images/I/51oBX5UFXNL._SL1500_.jpg')
- }
+  @Output() recipeSelected = new EventEmitter<Recipe>();
+  recipe = new Recipe('Dummy', 'Dummy', 'http://thumbs1.ebaystatic.com/d/l225/m/mfXELL6zPWJE4OC0agiXMZw.jpg');
+
+  constructor() {}
+
+  ngOnInit() {
+  }
+
+  onSelected(recipe: Recipe) {
+    this.recipeSelected.emit(recipe);
+  }
+
+}
