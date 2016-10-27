@@ -10,6 +10,8 @@ import { RecipeItemComponent } from './recipes/recipe-list/recipe-item.component
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingListAddComponent } from './shopping-list/shopping-list-add.component';
+import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import { RecipeStartComponent } from './recipes/recipe-start.component';
 
 import { DropdownDirective } from './dropdown.directive';
 
@@ -27,7 +29,9 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
                   RecipeDetailComponent,
                   ShoppingListComponent,
                   ShoppingListAddComponent,
-                  DropdownDirective ],
+                  DropdownDirective,
+                  RecipeEditComponent,
+                  RecipeStartComponent ],
   bootstrap:    [ AppComponent ],
   providers:    [ RecipeService,
                   ShoppingListService ]
