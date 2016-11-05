@@ -1,6 +1,7 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { routing } from './app.routing';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent }   from './app.component';
 import { HeaderComponent } from './header.component';
@@ -20,7 +21,9 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
 
 
 @NgModule({
-  imports:      [ BrowserModule, routing ],
+  imports:      [ BrowserModule, 
+                  routing,
+                  FormsModule ],
   declarations: [ AppComponent, 
                   HeaderComponent, 
                   RecipesComponent,
