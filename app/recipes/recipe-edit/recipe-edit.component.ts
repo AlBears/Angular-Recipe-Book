@@ -33,13 +33,14 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
             this.isNew = true;
             this.recipe = null;
           }
+          this.initForn();
           }
         )
     }
     ngOnDestroy(){
       this.subscription.unsubscribe();
     }
-    private initForn(isNew: boolean){
+    private initForn(){
       let recipeName = '';
       let recipeImageUrl = '';
       let recipeContent = '';
