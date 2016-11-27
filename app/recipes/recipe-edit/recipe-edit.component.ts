@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { FormArray, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
@@ -20,7 +20,8 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
 
     constructor(private route: ActivatedRoute, 
                 private recipeservice: RecipeService,
-                private formBuilder: FormBuilder ) {}
+                private formBuilder: FormBuilder,
+                private router: Router ) {}
 
     ngOnInit(){
         this.subscription = this.route.params.subscribe(
@@ -33,14 +34,30 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
             this.isNew = true;
             this.recipe = null;
           }
-          this.initForn();
+          this.initForm();
           }
         )
+    }
+
+    onSubmit(){
+      const newRecipe = this.recipeForm.value;
+      if (this.isNew) {
+        this.recipeservice.addRecipe(newRecipe);
+      } else {
+        this.recipeservice.editRecipe(this.recipe, newRecipe);
+      }
+      this.navigateBack();
+    }
+    onCancel() {
+      this.navigateBack();
     }
     ngOnDestroy(){
       this.subscription.unsubscribe();
     }
-    private initForn(){
+    private navigateBack() {
+      this.router.navigate(['../']);
+    }
+    private initForm(){
       let recipeName = '';
       let recipeImageUrl = '';
       let recipeContent = '';
