@@ -1,13 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { RecipeService } from './recipes/recipe.service';
+
 @Component({
   moduleId: module.id,
   selector: 'rb-header',
   templateUrl: 'header.component.html'
 })
-export class HeaderComponent implements OnInit{ 
-    constructor(){}
+export class HeaderComponent { 
+    constructor(private recipeService: RecipeService){}
 
-    ngOnInit(){
-        
-    }
+   onStore(){
+     this.recipeService.storeData().subscribe(
+       data => console.log(data),
+       error => console.log(error)
+
+     );
+   } 
+   onFetch(){
+
+   }
 }
