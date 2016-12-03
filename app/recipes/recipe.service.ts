@@ -1,11 +1,14 @@
-import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Injectable, EventEmitter } from '@angular/core';
+import { Headers, Http, Response } from '@angular/http';
+import 'rxjs/Rx'
 
 import { Recipe } from './recipe';
 import { Ingredient } from '../shared/ingredient';
 
 @Injectable()
 export class RecipeService {
+    recipesChanged = new EventEmitter<Recipe[]>();
+
     private recipes: Recipe[] = [
     new Recipe('Schnitzel', 'Very tasty', 
     'http://www.duden.de/_media_/full/S/Schnitzel-201020474666.jpg', 
@@ -39,7 +42,17 @@ export class RecipeService {
         const headers = new Headers({
             'Content-Type': 'application/json'
         });
-        return this.http.post('https://recipebook-9b92d.firebaseio.com/recipes.json', body, { headers });
+        return this.http.put('https://recipebook-9b92d.firebaseio.com/recipes.json', body, { headers });
 
+    }
+    fetchData() {
+        return this.http.get('https://recipebook-9b92d.firebaseio.com/recipes.json')
+                .map((response: Response) => response.json())
+                .subscribe(
+                    (data: Recipe[]) => {
+                        this.recipes = data;
+                        this.recipesChanged.emit(this.recipes);
+                    }
+                );
     }
 }
