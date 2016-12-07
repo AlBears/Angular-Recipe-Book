@@ -5,12 +5,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { ShoppingListModule } from './shopping-list/shopping-list.module';
-
+import { CoreModule } from './core.module';
 
 import { AppComponent }   from './app.component';
 import { HeaderComponent } from './header.component';
-import { DropdownDirective } from './dropdown.directive';
-import { HomeComponent } from './home.component';
 
 import { RecipeService } from './recipes/recipe.service';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
@@ -21,11 +19,10 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
                   routing,
                   HttpModule,
                   ShoppingListModule,
+                  CoreModule
                   ],
   declarations: [ AppComponent, 
                   HeaderComponent, 
-                  DropdownDirective,
-                  HomeComponent
                  ],
   bootstrap:    [ AppComponent ],
   providers:    [ RecipeService,
